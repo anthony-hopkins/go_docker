@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      - MARIADB_ROOT_PASSWORD=changeme
+      - MARIADB_DATABASE=test
+    ports:
+      - "3306:3306"
+
+  <APP>:
+    build:
+      context: .
+    depends_on:
+      - db
+    command: >
+      go run <APP>.go
